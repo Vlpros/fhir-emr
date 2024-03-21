@@ -18,9 +18,8 @@ body:
       intent: "{{ QuestionnaireResponse.repeat(item).where(linkId='intent').answer.valueCoding.code }}"
       priority: "{{ QuestionnaireResponse.repeat(item).where(linkId='priority').answer.valueCoding.code }}"
       requester:
-        reference: "{{ 'Practitioner/' + QuestionnaireResponse.repeat(item).where(linkId='practitioner-id').answer.valueString }}"
+        reference: "{{ 'Practitioner/' + QuestionnaireResponse.repeat(item).where(linkId='practitiner-id').answer.valueString }}"
       subject:
         reference: "{{ 'Patient/' + QuestionnaireResponse.repeat(item).where(linkId='patient-id').answer.valueString }}"
-
-
-
+      performer:
+      - reference: "{{ QuestionnaireResponse.repeat(item).where(linkId='assigned-organization').answer.valueReference.reference }}"

@@ -24,14 +24,12 @@ export const patientDashboardConfig: DashboardInstance = {
         },
         {
             query: {
-                resourceType: 'Observation',
+                resourceType: 'ServiceRequest',
                 search: (patient: Patient) => ({
-                    patient: patient.id,
-                    code: 'http://loinc.org|2160-0',
-                    _sort: ['-date'],
+                    subject: patient.id,
                 }),
             },
-            widget: CreatinineDashboardContainer,
+            widget: StandardCardContainerFabric(prepareServiceRequest),
         },
     ],
     left: [
@@ -109,15 +107,6 @@ export const patientDashboardConfig: DashboardInstance = {
                 }),
             },
             widget: StandardCardContainerFabric(prepareConsents),
-        },
-        {
-            query: {
-                resourceType: 'ServiceRequest',
-                search: (patient: Patient) => ({
-                    subject: patient.id,
-                }),
-            },
-            widget: StandardCardContainerFabric(prepareServiceRequest),
         },
     ],
     bottom: [],

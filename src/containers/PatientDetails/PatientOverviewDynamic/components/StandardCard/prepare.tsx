@@ -299,15 +299,41 @@ export function prepareServiceRequest(
         getKey: (r: ServiceRequest) => r.id!,
         columns: [
             {
+                title: t`ID`,
+                key: 'id',
+                render: (resource: ServiceRequest) => resource.id!,
+                width: 300,
+            },
+            {
                 title: t`Name`,
                 key: 'name',
                 render: (resource: ServiceRequest) => resource.code?.text ?? resource.code?.coding?.[0]?.display,
+                width: 200,
             },
             {
-                title: t`Intent`,
-                key: 'intent',
-                render: (r: ServiceRequest) => r.intent,
-                width: 120,
+                title: t`Status`,
+                key: 'status',
+                render: (resource: ServiceRequest) => resource.status,
+                width: 100,
+            },
+            {
+                title: t`External id`,
+                key: 'externalid',
+                render: (r: ServiceRequest) => {
+                    const identifier = r.identifier?.[0];
+                    if (identifier) {
+                        const { value, system } = identifier;
+                        const link = `${system}/${value}`;
+                        return (
+                            <a href={link} target="_blank" rel="noreferrer">
+                                {value}
+                            </a>
+                        );
+                    } else {
+                        return '';
+                    }
+                },
+                width: 320,
             },
         ],
     };
