@@ -17,6 +17,8 @@ body:
         text: "{{ QuestionnaireResponse.repeat(item).where(linkId='test-code').answer.valueString }}"
       intent: "{{ QuestionnaireResponse.repeat(item).where(linkId='intent').answer.valueCoding.code }}"
       priority: "{{ QuestionnaireResponse.repeat(item).where(linkId='priority').answer.valueCoding.code }}"
+      encounter:
+        reference: "{{ 'Encounter/' + QuestionnaireResponse.repeat(item).where(linkId='encounter-id').answer.valueString }}"
       requester:
         reference: "{{ 'Practitioner/' + QuestionnaireResponse.repeat(item).where(linkId='practitiner-id').answer.valueString }}"
       subject:
