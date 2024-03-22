@@ -317,17 +317,24 @@ export function prepareServiceRequest(
                 width: 100,
             },
             {
-                title: t`External id`,
+                title: t`External ids`,
                 key: 'externalid',
                 render: (r: ServiceRequest) => {
                     const identifier = r.identifier?.[0];
                     if (identifier) {
                         const { value, system } = identifier;
-                        const link = `${system}/${value}`;
+                        const srLink = `${system}/${value}`;
+                        const taskLink = `https://sparked.npd.telstrahealth.com/ereq/fhir/Task?focus=${value}`;
                         return (
-                            <a href={link} target="_blank" rel="noreferrer">
-                                {value}
-                            </a>
+                            <div>
+                                <a href={srLink} target="_blank" rel="noreferrer">
+                                    ServiceRrequest
+                                </a>
+                                <br />
+                                <a href={taskLink} target="_blank" rel="noreferrer">
+                                    Task
+                                </a>
+                            </div>
                         );
                     } else {
                         return '';
